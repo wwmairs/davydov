@@ -1,0 +1,21 @@
+@import url("vcr_osd_mono.css");
+
+#sidebar {
+    font-family: "VCR OSD Mono";
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+#postcardsContainer {
+    width: 75vw;
+    margin: auto;
+}
+
+#postcardsContainer div {
+    width: 49%;  
+    display: inline-block;
+}
+
+#postcardsContainer img {
+    width: calc(100% - 10vw);
+}

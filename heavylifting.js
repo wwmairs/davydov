@@ -1,3 +1,13 @@
+// utils
+function zipwith(f, xs, ys) {
+    if (xs.length == 0) {
+        return [];
+    } else {
+        let z = f(xs.pop(), ys.pop());
+        return zipwith(f, xs, ys).concat([z]);
+    }
+}
+
 var cmsData = sessionStorage.getItem("cmsData");
 
 if (cmsData == null) {
@@ -27,35 +37,64 @@ if (cmsData == null) {
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
             cmsData = dbData;
             // do shit with the data
-            makeGalleries(cmsData);
-            
-            console.log("fetching...");
-            console.log(dbData);
+            draw();
         });
 } else {
     // do shit
     cmsData = JSON.parse(cmsData);
+    draw();
 }
 
-function makeGalleries(cmsData) {
+function draw() {
     console.log(cmsData);
-    for (key in cmsData) {
-        // if it's a gallery
-        // if you can find a gallery el defined
-        //if (! cmsData[key]["is_gallery"] || ! document.getElementById(key)) {
-        //    console.log("skipping", key);
-        //    continue;
-        //}
-        let gallery = document.getElementById(key);
-        cmsData[key]["links"].map((src) => {
-            let div = document.createElement("div");
-            let img = document.createElement("img");
-            img.setAttribute("class", "gallery-img");
-            img.setAttribute("src", src);
-            div.setAttribute("class", "gallery-img-container");
-            div.appendChild(img);
-            gallery.appendChild(div);
-        });
+    // make sidebar
+    drawSidebar();
+    // check url params
+    // make gallery
+    // make postcards
+    drawPostcards();
+}
 
-    }
+function drawSidebar() {
+    let sideBar = document.getElementById("sidebar");
+    Object.keys(cmsData).map((c) => {
+        if (c != "") {
+            // make wrapper
+            let div = document.createElement("div");
+            // make checkbox (?)
+            // make name
+            let a = document.createElement("a");
+            a.setAttribute("name", c);
+            a.innerHTML = c;
+            div.appendChild(a);
+            sideBar.appendChild(div);
+        }
+    });
+}
+
+function drawPostcards() {
+    let cont = document.getElementById("postcardsContainer");
+
+    let cards = Object.values(cmsData)
+        .reduce( (xs, ys) => {
+            return xs.concat(ys);
+        })
+        .filter((c) => c.category != "")
+        .sort((a, b) => b.date - a.date);
+
+    cards.map( c => {
+        let div = document.createElement("div");
+        let a = document.createElement("a");
+        let img = document.createElement("img");
+        let label = document.createElement("span");
+        img.setAttribute("src", c.imageLinks[0]);
+        label.inenrHTML = c.projectName;
+        a.appendChild(img);
+        a.appendChild(label);
+        div.appendChild(a);
+        cont.appendChild(div);
+    });
+
+    console.log(cards);
+
 }
