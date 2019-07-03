@@ -88,9 +88,9 @@ function drawPostcards() {
         let img = document.createElement("img");
         let label = document.createElement("span");
         img.setAttribute("src", c.imageLinks[0]);
-        label.inenrHTML = c.projectName;
-        a.appendChild(img);
+        label.innerHTML = c.projectName;
         a.appendChild(label);
+        div.appendChild(img);
         div.appendChild(a);
         cont.appendChild(div);
     });
