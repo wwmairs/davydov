@@ -8,6 +8,12 @@ function zipwith(f, xs, ys) {
     }
 }
 
+// get url params
+var params = new URLSearchParams(window.location.search);
+var pName = params.get("p");
+var about = params.get("about") != null;
+var filters = params.get("filters");
+
 var cmsData = sessionStorage.getItem("cmsData");
 
 if (cmsData == null) {
@@ -87,14 +93,14 @@ function drawPostcards() {
         let a = document.createElement("a");
         let img = document.createElement("img");
         let label = document.createElement("span");
+        div.setAttribute("class", "postCard " + c.category);
         img.setAttribute("src", c.imageLinks[0]);
         label.innerHTML = c.projectName;
+        a.setAttribute("name", c.projectName);
+        a.setAttribute("href", "?p=" + c.projectName);
         a.appendChild(label);
         div.appendChild(img);
         div.appendChild(a);
         cont.appendChild(div);
     });
-
-    console.log(cards);
-
 }
