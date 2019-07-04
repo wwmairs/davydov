@@ -1,24 +1,27 @@
 @import url("vcr_osd_mono.css");
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400i&display=swap');
+
+body {
+    background: #fdfdfd;
+}
 
 #sidebar {
-    font-family: "VCR OSD Mono";
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #0000ff;
+    font-family: "IBM Plex Serif", serif;
     position: fixed;
     z-index: 1;
 }
 
 #postcardsContainer {
+    position: absolute !important;
+    right: 2px;
     width: 85vw;
-    margin: auto;
-    padding-top: 20vh;
+    position: relative;
 }
 
 #postcardsContainer div.grid-item {
-    width: 40vw;
-    float: left;
-    margin: 10px;
+    width: 47%;
+    float: right;
+    margin: 2.5px;
     position: relative;
 }
 
@@ -27,13 +30,13 @@
     display: block;
     top: 0;
     left: 0;
-    height: 98%;
+    height: 100%;
     width: 100%;
     font-family: "VCR OSD Mono";
     text-transform: uppercase;
     letter-spacing: 4px;
     color: #ffffff;
-    background: rgba(0, 0, 255, .9);;
+    background: #0000ff;
     opacity: 0;
 }
 

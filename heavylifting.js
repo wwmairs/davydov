@@ -65,10 +65,7 @@ function drawSidebar() {
     let sideBar = document.getElementById("sidebar");
     Object.keys(cmsData).map((c) => {
         if (c != "") {
-            // make wrapper
             let div = document.createElement("div");
-            // make checkbox (?)
-            // make name
             let a = document.createElement("a");
             a.setAttribute("name", c);
             a.innerHTML = c;
@@ -76,6 +73,13 @@ function drawSidebar() {
             sideBar.appendChild(div);
         }
     });
+    let div = document.createElement("div");
+    let a = document.createElement("a");
+    a.setAttribute("name", "about");
+    a.setAttribute("href", "?about");
+    a.innerHTML = "about";
+    div.appendChild(a);
+    sidebar.appendChild(div);
 }
 
 function drawPostcards() {
