@@ -93,7 +93,7 @@ function drawPostcards() {
         let a = document.createElement("a");
         let img = document.createElement("img");
         let label = document.createElement("span");
-        div.setAttribute("class", "postCard " + c.category);
+        div.setAttribute("class", "grid-item postCard " + c.category);
         img.setAttribute("src", c.imageLinks[0]);
         label.innerHTML = c.projectName;
         a.setAttribute("name", c.projectName);
@@ -104,3 +104,9 @@ function drawPostcards() {
         cont.appendChild(div);
     });
 }
+
+imagesLoaded(document.querySelector(".grid"), () => {
+    var msnry = new Masonry(".grid", {
+        itemSelector: "grid-item"
+    });
+});
