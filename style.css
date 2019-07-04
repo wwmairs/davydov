@@ -25,19 +25,19 @@
     display: block;
     top: 0;
     left: 50%;
-    height: 100%;
+    height: calc(100% - 4px);
     width: calc(100% - 10vw);
     transform: translateX(-50%);
     font-family: "VCR OSD Mono";
     text-transform: uppercase;
     letter-spacing: 4px;
     color: #ffffff;
-    background: #0000ff;
+    background: rgba(0, 0, 255, .9);;
     opacity: 0;
 }
 
 #postcardsContainer a:hover {
-    opacity: .95;
+    opacity: 1;
 }
 
 #postcardsContainer img {
