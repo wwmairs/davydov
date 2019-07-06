@@ -10,7 +10,8 @@ function zipwith(f, xs, ys) {
 
 // get url params
 var params = new URLSearchParams(window.location.search);
-var pName = params.get("p");
+var cname = params.get("c");
+var pname = params.get("p");
 var about = params.get("about") != null;
 var filters = params.get("filters");
 
@@ -36,9 +37,9 @@ if (cmsData == null) {
         .then((snapshot) => {
             snapshot.val().map((o) => {
                 if (dbData[o.category] == undefined) {
-                    dbData[o.category] = [];
+                    dbData[o.category] = {};
                 }
-                dbData[o.category].push(o);
+                dbData[o.category][o.projectName] = o;
             });
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
             cmsData = dbData;
@@ -52,13 +53,14 @@ if (cmsData == null) {
 }
 
 function draw() {
-    console.log(cmsData);
-    // make sidebar
+    if (about) {
+        drawAbout();
+    } else if (pname && cname) {
+        drawGallery(pname);
+    } else {
+        drawPostcards();
+    }
     drawSidebar();
-    // check url params
-    // make gallery
-    // make postcards
-    drawPostcards();
 }
 
 function drawSidebar() {
@@ -101,16 +103,29 @@ function drawPostcards() {
         img.setAttribute("src", c.imageLinks[0]);
         label.innerHTML = c.projectName;
         a.setAttribute("name", c.projectName);
-        a.setAttribute("href", "?p=" + c.projectName);
+        a.setAttribute("href", "?p=" + c.projectName + "&c=" + c.category);
         a.appendChild(label);
         div.appendChild(img);
         div.appendChild(a);
         cont.appendChild(div);
     });
+    imagesLoaded(document.querySelector(".grid"), () => {
+        var msnry = new Masonry(".grid", {
+            itemSelector: "grid-item"
+        });
+    });
 }
 
-imagesLoaded(document.querySelector(".grid"), () => {
-    var msnry = new Masonry(".grid", {
-        itemSelector: "grid-item"
+function drawGallery(pname) {
+    let project = cmsData[cname][pname];
+    let gallery = document.getElementById("gallery");
+    project.imageLinks.map((src) => {
+        let div = document.createElement("div");
+        let img = document.createElement("img");
+        div.setAttribute("class", "slide");
+        img.setAttribute("class", "slide");
+        img.setAttribute("src", src);
+        div.appendChild(img);
+        gallery.appendChild(div);
     });
-});
+}

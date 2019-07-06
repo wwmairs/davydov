@@ -3,6 +3,7 @@
 
 body {
     background: #fdfdfd;
+    margin: 0;
 }
 
 #sidebar {
@@ -21,7 +22,7 @@ body {
 #postcardsContainer div.grid-item {
     width: 47%;
     float: right;
-    margin: 2.5px;
+    margin: 5px;
     position: relative;
 }
 
@@ -53,6 +54,27 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#gallery {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: inline-block;
+    height: calc(100vh - 40px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: absolute;
+    top: 0;
+    left: 15vw;
+}
+
+.slide {
+    display: inline-block;
+    height: 100%;
+}
+
+.slide:not(:last-child) {
+    margin-right: 5px;
 }
 
 .hidden {
