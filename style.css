@@ -1,5 +1,4 @@
 @import url("vcr_osd_mono.css");
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400i&display=swap');
 
 body {
     background: #fdfdfd;
@@ -7,23 +6,49 @@ body {
 }
 
 #sidebar {
-    font-family: "IBM Plex Serif", serif;
-    position: fixed;
+    font-family: "neue-haas-grotesk-display", sans-serif;
+    font-weight: 500;
     z-index: 1;
+    font-size: 22pt;
+    margin: 10px;
+    border-bottom: 3px solid #000000;
+}
+
+#sidebar h2 {
+    font-weight: 500;
+    display: inline;
+}
+
+#sidebar div {
+    display: inline;
+    float: right;
 }
 
 #postcardsContainer {
     position: absolute !important;
     right: 2px;
-    width: 85vw;
     position: relative;
 }
 
 #postcardsContainer div.grid-item {
-    width: 47%;
+    width: 48%;
     float: right;
     margin: 5px;
     position: relative;
+    right: .5vw;
+}
+
+#postcardsContainer a.blue {
+    background: #0000ff;
+}
+
+#postcardsContainer a.red {
+    background: #ff0000;
+}
+
+#postcardsContainer a.yellow {
+    background: #ffff00;
+    color: #000000;
 }
 
 #postcardsContainer a {
@@ -37,7 +62,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 4px;
     color: #ffffff;
-    background: #0000ff;
     opacity: 0;
 }
 

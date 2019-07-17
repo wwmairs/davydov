@@ -8,6 +8,11 @@ function zipwith(f, xs, ys) {
     }
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+
 // get url params
 var params = new URLSearchParams(window.location.search);
 var cname = params.get("c");
@@ -86,15 +91,19 @@ function drawSidebar() {
 
 function drawPostcards() {
     let cont = document.getElementById("postcardsContainer");
+    let colorClasses = ["red", "blue", "yellow"];
 
     let cards = Object.values(cmsData)
         .reduce( (xs, ys) => {
-            return xs.concat(ys);
+            console.log(xs, ys);
+            return Object.values(xs).concat(Object.values(ys));
         })
         .filter((c) => c.category != "")
         .sort((a, b) => b.date - a.date);
 
     cards.map( c => {
+        let colorNumber = getRandomInt(3);
+        console.log(colorNumber, colorClasses[colorNumber]);
         let div = document.createElement("div");
         let a = document.createElement("a");
         let img = document.createElement("img");
@@ -102,6 +111,7 @@ function drawPostcards() {
         div.setAttribute("class", "grid-item postCard " + c.category);
         img.setAttribute("src", c.imageLinks[0]);
         label.innerHTML = c.projectName;
+        a.setAttribute("class", colorClasses[colorNumber]);
         a.setAttribute("name", c.projectName);
         a.setAttribute("href", "?p=" + c.projectName + "&c=" + c.category);
         a.appendChild(label);
