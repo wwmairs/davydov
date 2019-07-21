@@ -24,12 +24,16 @@ body {
 
 #sidebar a {
     text-decoration: none;
-    color: #000000;
+    color: blue;
 }
 
 #sidebar h2 {
     font-weight: 500;
     display: inline;
+}
+
+#sidebar h2 a {
+    color: red;
 }
 
 #sidebar div {
@@ -64,21 +68,33 @@ body {
 #postcardsContainer a.blue {
     color: #0000ff;
     background: #fdfdfd;
+    border: 3px solid blue;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
 }
 
 #postcardsContainer a.red {
     color: #ff0000;
     background: #fdfdfd;
+    border: 3px solid red;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
 }
 
 #postcardsContainer a.green {
     color: #00ff00;
     background: #fdfdfd;
+    border: 3px solid #00ff00;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
 }
 
 #postcardsContainer a.yellow {
     color: #ffff00;
     background: #fdfdfd;
+    border: 3px solid yellow;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
 }
 
 #postcardsContainer a {
@@ -140,6 +156,26 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
+}
+
+.description {
+    white-space: initial;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+}
+
+.description h3 {
+    font-weight: 500;
+}
+
+.description span {
+    font-weight: 500;
+}
+
+.description p {
 }
 
 .hidden {

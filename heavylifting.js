@@ -137,8 +137,26 @@ function drawPostcards() {
 
 function drawGallery(pname) {
     let project = cmsData[cname][pname];
+    console.log(project);
     let gallery = document.createElement("div");
     gallery.setAttribute("id", "gallery");
+    // description and whatnot
+    let slide = document.createElement("div");
+    let div = document.createElement("div");
+    let h3 = document.createElement("h3");
+    let span = document.createElement("span");
+    let p = document.createElement("p");
+    slide.setAttribute("class", "slide");
+    div.setAttribute("class", "description");
+    h3.innerHTML = project.projectName;
+    span.innerHTML = project.details + "<br>" + project.date;
+    p.innerHTML = project.description;
+    div.appendChild(h3);
+    div.appendChild(span);
+    div.appendChild(p);
+    slide.appendChild(div);
+    gallery.appendChild(slide);
+
     project.imageLinks.map((src) => {
         let div = document.createElement("div");
         let img = document.createElement("img");
@@ -171,7 +189,8 @@ function toggleCategory(cname) {
         el.classList.toggle("hidden");
     });
     // toggle display on button
-    document.getElementById(cname + "Button").classList.toggle("toggleButtonInactive");
+    let button = document.getElementById(cname + "Button");
+    button.classList.toggle("toggleButtonInactive");
     let chk = document.getElementById(cname + "Chkbox");
-    chk.checked = !chk.checked;
+    chk.checked = !button.classList.contains("toggleButtonInactive");
 }
