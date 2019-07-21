@@ -73,9 +73,16 @@ function drawSidebar() {
     Object.keys(cmsData).map((c) => {
         if (c != "") {
             let div = document.createElement("div");
+            let chk = document.createElement("input");
             let a = document.createElement("a");
             a.setAttribute("name", c);
             a.innerHTML = c;
+            chk.setAttribute("type", "checkbox");
+            chk.setAttribute("checked", true);
+            chk.setAttribute("id", c + "Chkbox");
+            div.setAttribute("id", c + "Button");
+            div.onclick = () => toggleCategory(c);
+            div.appendChild(chk);
             div.appendChild(a);
             sideBar.appendChild(div);
         }
@@ -87,15 +94,17 @@ function drawSidebar() {
     a.innerHTML = "about";
     div.appendChild(a);
     sidebar.appendChild(div);
+
 }
 
 function drawPostcards() {
-    let cont = document.getElementById("postcardsContainer");
-    let colorClasses = ["red", "blue", "yellow"];
+    let cont = document.createElement("div");
+    cont.setAttribute("id", "postcardsContainer");
+    cont.setAttribute("class", "grid");
+    let colorClasses = ["red", "blue", "green"];
 
     let cards = Object.values(cmsData)
         .reduce( (xs, ys) => {
-            console.log(xs, ys);
             return Object.values(xs).concat(Object.values(ys));
         })
         .filter((c) => c.category != "")
@@ -103,7 +112,6 @@ function drawPostcards() {
 
     cards.map( c => {
         let colorNumber = getRandomInt(3);
-        console.log(colorNumber, colorClasses[colorNumber]);
         let div = document.createElement("div");
         let a = document.createElement("a");
         let img = document.createElement("img");
@@ -119,6 +127,7 @@ function drawPostcards() {
         div.appendChild(a);
         cont.appendChild(div);
     });
+    document.getElementById("main").appendChild(cont);
     imagesLoaded(document.querySelector(".grid"), () => {
         var msnry = new Masonry(".grid", {
             itemSelector: "grid-item"
@@ -128,14 +137,41 @@ function drawPostcards() {
 
 function drawGallery(pname) {
     let project = cmsData[cname][pname];
-    let gallery = document.getElementById("gallery");
+    let gallery = document.createElement("div");
+    gallery.setAttribute("id", "gallery");
     project.imageLinks.map((src) => {
         let div = document.createElement("div");
         let img = document.createElement("img");
         div.setAttribute("class", "slide");
-        img.setAttribute("class", "slide");
+        img.setAttribute("class", "slideImg");
         img.setAttribute("src", src);
         div.appendChild(img);
         gallery.appendChild(div);
     });
+    if (project.videoLinks) {
+        project.videoLinks.map((src) => {
+            let div = document.createElement("div");
+            let video = document.createElement("video");
+            let source = document.createElement("source");
+            div.setAttribute("class", "slide");
+            video.setAttribute("class", "slideImg");
+            video.setAttribute("src", src);
+            source.setAttribute("src", src);
+            video.appendChild(source);
+            div.appendChild(video);
+            gallery.appendChild(div);
+        });
+    }
+    document.getElementById("main").appendChild(gallery);
+}
+
+function toggleCategory(cname) {
+    let elems = document.getElementsByClassName(cname);
+    Array.prototype.map.call(elems, (el) => {
+        el.classList.toggle("hidden");
+    });
+    // toggle display on button
+    document.getElementById(cname + "Button").classList.toggle("toggleButtonInactive");
+    let chk = document.getElementById(cname + "Chkbox");
+    chk.checked = !chk.checked;
 }
