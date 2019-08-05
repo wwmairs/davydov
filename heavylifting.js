@@ -41,10 +41,13 @@ if (cmsData == null) {
     db.ref("data").once("value")
         .then((snapshot) => {
             snapshot.val().map((o) => {
-                if (dbData[o.category] == undefined) {
-                    dbData[o.category] = {};
+                console.log(o);
+                if (o.category != "about") {
+                    if (dbData[o.category] == undefined) {
+                        dbData[o.category] = {};
+                    }
+                    dbData[o.category][o.projectName] = o;
                 }
-                dbData[o.category][o.projectName] = o;
             });
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
             cmsData = dbData;
