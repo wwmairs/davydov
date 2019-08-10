@@ -41,13 +41,10 @@ if (cmsData == null) {
     db.ref("data").once("value")
         .then((snapshot) => {
             snapshot.val().map((o) => {
-                console.log(o);
-                if (o.category != "about") {
-                    if (dbData[o.category] == undefined) {
-                        dbData[o.category] = {};
-                    }
-                    dbData[o.category][o.projectName] = o;
-                }
+            if (dbData[o.category] == undefined) {
+                dbData[o.category] = {};
+            }
+            dbData[o.category][o.projectName] = o;
             });
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
             cmsData = dbData;
@@ -63,18 +60,34 @@ if (cmsData == null) {
 function draw() {
     if (about) {
         drawAbout();
+        drawSmallSidebar();
     } else if (pname && cname) {
         drawGallery(pname);
+        drawSmallSidebar();
     } else {
         drawPostcards();
+        drawBigSidebar();
     }
-    drawSidebar();
 }
 
-function drawSidebar() {
+function drawBigSidebar() {
     let sideBar = document.getElementById("sidebar");
+    let div = document.createElement("div");
+    let a = document.createElement("a");
+    a.setAttribute("name", "about");
+    a.setAttribute("href", "?about");
+    a.innerHTML = "about";
+    div.appendChild(a);
+    let h2 = document.createElement("h2");
+    a = document.createElement("a");
+    a.setAttribute("id", "indexLink");
+    a.setAttribute("href", "/");
+    a.innerHTML = "Davydov";
+    h2.appendChild(a);
+    sidebar.appendChild(h2);
+    sidebar.appendChild(div);
     Object.keys(cmsData).map((c) => {
-        if (c != "") {
+        if (c != "" && c != "about") {
             let div = document.createElement("div");
             let chk = document.createElement("input");
             let a = document.createElement("a");
@@ -85,19 +98,29 @@ function drawSidebar() {
             chk.setAttribute("id", c + "Chkbox");
             div.setAttribute("id", c + "Button");
             div.onclick = () => toggleCategory(c);
-            div.appendChild(chk);
             div.appendChild(a);
+            div.appendChild(chk);
             sideBar.appendChild(div);
         }
     });
+}
+
+function drawSmallSidebar() {
+    let sideBar = document.getElementById("sidebar");
     let div = document.createElement("div");
     let a = document.createElement("a");
-    a.setAttribute("name", "about");
-    a.setAttribute("href", "?about");
-    a.innerHTML = "about";
+    a.setAttribute("name", "back");
+    a.setAttribute("href", "/");
+    a.innerHTML = "< back";
     div.appendChild(a);
     sidebar.appendChild(div);
-
+    let h2 = document.createElement("h2");
+    a = document.createElement("a");
+    a.setAttribute("id", "indexLink");
+    a.setAttribute("href", "/");
+    a.innerHTML = "Davydov";
+    h2.appendChild(a);
+    //sidebar.appendChild(h2);
 }
 
 function drawPostcards() {
@@ -110,7 +133,7 @@ function drawPostcards() {
         .reduce( (xs, ys) => {
             return Object.values(xs).concat(Object.values(ys));
         })
-        .filter((c) => c.category != "")
+        .filter((c) => c.category != "" && c.category != "about")
         .sort((a, b) => b.date - a.date);
 
     cards.map( c => {
@@ -184,6 +207,31 @@ function drawGallery(pname) {
         });
     }
     document.getElementById("main").appendChild(gallery);
+}
+
+function drawAbout() {
+    console.log(cmsData);
+    let aboutDiv = document.createElement("div");
+    aboutDiv.setAttribute("id", "about-container");
+    Object.entries(cmsData.about).map( (entry) => {
+        let sectionName = entry[0];
+        let obj = entry[1];
+        let div = document.createElement("div");
+        let name = document.createElement("h4");
+        name.innerHTML = sectionName;
+        div.appendChild(name);
+        Object.entries(obj).map((section) => {
+            let colName = section[0];
+            let content = section[1];
+            if (colName.indexOf("aboutParagraph") >= 0) {
+                let p = document.createElement("p");
+                p.innerHTML = content;
+                div.appendChild(p);
+            }
+        });
+        aboutDiv.appendChild(div);
+    });
+    document.getElementById("main").appendChild(aboutDiv);
 }
 
 function toggleCategory(cname) {
