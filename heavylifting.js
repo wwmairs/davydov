@@ -81,7 +81,7 @@ function drawBigSidebar() {
     let h2 = document.createElement("h2");
     a = document.createElement("a");
     a.setAttribute("id", "indexLink");
-    a.setAttribute("href", "/");
+    a.setAttribute("href", "/davydov");
     a.innerHTML = "Davydov";
     h2.appendChild(a);
     sidebar.appendChild(h2);
@@ -110,14 +110,14 @@ function drawSmallSidebar() {
     let div = document.createElement("div");
     let a = document.createElement("a");
     a.setAttribute("name", "back");
-    a.setAttribute("href", "/");
+    a.setAttribute("href", "/davydov");
     a.innerHTML = "< back";
     div.appendChild(a);
     sidebar.appendChild(div);
     let h2 = document.createElement("h2");
     a = document.createElement("a");
     a.setAttribute("id", "indexLink");
-    a.setAttribute("href", "/");
+    a.setAttribute("href", "/davydov");
     a.innerHTML = "Davydov";
     h2.appendChild(a);
     //sidebar.appendChild(h2);
