@@ -41,10 +41,13 @@ if (cmsData == null) {
     db.ref("data").once("value")
         .then((snapshot) => {
             snapshot.val().map((o) => {
-            if (dbData[o.category] == undefined) {
-                dbData[o.category] = {};
-            }
-            dbData[o.category][o.projectName] = o;
+                console.log(o.category, typeof(o.category));
+                if (o.category != "") {
+                    if (dbData[o.category] == undefined) {
+                        dbData[o.category] = {};
+                    }
+                    dbData[o.category][o.projectName] = o;
+                }
             });
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
             cmsData = dbData;
@@ -196,16 +199,18 @@ function drawGallery(pname) {
     });
     if (project.videoLinks) {
         project.videoLinks.map((src) => {
-            let div = document.createElement("div");
-            let video = document.createElement("video");
-            let source = document.createElement("source");
-            div.setAttribute("class", "slide");
-            video.setAttribute("class", "slideImg");
-            video.setAttribute("src", src);
-            source.setAttribute("src", src);
-            video.appendChild(source);
-            div.appendChild(video);
-            gallery.appendChild(div);
+            if (src != "" && src != " ") {
+                let div = document.createElement("div");
+                let iframe = document.createElement("iframe");
+                div.setAttribute("class", "slide");
+                iframe.setAttribute("class", "slideImg");
+                iframe.setAttribute("src", src);
+                iframe.setAttribute("frameborder", "0");
+                iframe.setAttribute("allow", "accelerometer; encrypted-media; gyroscope; picture-in-picture");
+                iframe.setAttribute("allowfullscreen", "true");
+                div.appendChild(iframe);
+                gallery.appendChild(div);
+            }
         });
     }
     document.getElementById("main").appendChild(gallery);
