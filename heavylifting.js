@@ -81,7 +81,7 @@ function drawBigSidebar() {
     let h2 = document.createElement("h2");
     a = document.createElement("a");
     a.setAttribute("id", "indexLink");
-    a.setAttribute("href", "/davydov");
+    a.setAttribute("href", "/");
     a.innerHTML = "Davydov";
     h2.appendChild(a);
     sidebar.appendChild(h2);
@@ -110,7 +110,7 @@ function drawSmallSidebar() {
     let div = document.createElement("div");
     let a = document.createElement("a");
     a.setAttribute("name", "back");
-    a.setAttribute("href", "/davydov");
+    a.setAttribute("href", "/");
     a.innerHTML = "< back";
     div.appendChild(a);
     sidebar.appendChild(div);
@@ -153,7 +153,9 @@ function drawPostcards() {
         div.appendChild(a);
         cont.appendChild(div);
     });
+
     document.getElementById("main").appendChild(cont);
+
     imagesLoaded(document.querySelector(".grid"), () => {
         var msnry = new Masonry(".grid", {
             itemSelector: "grid-item"
@@ -232,6 +234,8 @@ function drawAbout() {
         aboutDiv.appendChild(div);
     });
     document.getElementById("main").appendChild(aboutDiv);
+
+
 }
 
 function toggleCategory(cname) {
