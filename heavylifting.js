@@ -41,7 +41,6 @@ if (cmsData == null) {
     db.ref("data").once("value")
         .then((snapshot) => {
             snapshot.val().map((o) => {
-                console.log(o.category, typeof(o.category));
                 if (o.category != "") {
                     if (dbData[o.category] == undefined) {
                         dbData[o.category] = {};
@@ -150,7 +149,7 @@ function drawPostcards() {
         label.innerHTML = c.projectName;
         a.setAttribute("class", colorClasses[colorNumber]);
         a.setAttribute("name", c.projectName);
-        a.setAttribute("href", "?p=" + c.projectName + "&c=" + c.category);
+        a.setAttribute("href", encodeURI("?p=" + c.projectName + "&c=" + c.category));
         a.appendChild(label);
         div.appendChild(img);
         div.appendChild(a);
@@ -168,7 +167,6 @@ function drawPostcards() {
 
 function drawGallery(pname) {
     let project = cmsData[cname][pname];
-    console.log(project);
     let gallery = document.createElement("div");
     gallery.setAttribute("id", "gallery");
     // description and whatnot
@@ -217,7 +215,6 @@ function drawGallery(pname) {
 }
 
 function drawAbout() {
-    console.log(cmsData);
     let aboutDiv = document.createElement("div");
     aboutDiv.setAttribute("id", "about-container");
     Object.entries(cmsData.about).map( (entry) => {
