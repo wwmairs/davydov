@@ -85,7 +85,7 @@ function drawBigSidebar() {
     a = document.createElement("a");
     a.setAttribute("id", "indexLink");
     a.setAttribute("href", "/");
-    a.innerHTML = "Davydov";
+    a.innerHTML = "Misha Davydov";
     h2.appendChild(a);
     sidebar.appendChild(h2);
     sidebar.appendChild(div);
@@ -121,7 +121,7 @@ function drawSmallSidebar() {
     a = document.createElement("a");
     a.setAttribute("id", "indexLink");
     a.setAttribute("href", "/davydov");
-    a.innerHTML = "Davydov";
+    a.innerHTML = "Misha Davydov";
     h2.appendChild(a);
     //sidebar.appendChild(h2);
 }

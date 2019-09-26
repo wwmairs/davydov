@@ -4,19 +4,19 @@ body {
     background: #fdfdfd;
     margin: 0;
     font-family: "neue-haas-grotesk-display", sans-serif;
-    cursor: url(cursors/cursor.png), auto;
+    /*cursor: url(cursors/cursor.png), auto;*/
 }
 
 a {
-    cursor: url(cursors/pointer.png), auto;
+    /*cursor: url(cursors/pointer.png), auto;*/
 }
 
 input {
-    cursor: url(cursors/pointer.png), auto;
+    /*cursor: url(cursors/pointer.png), auto;*/
 }
 
 h2, h3, h4, span, p {
-    cursor: url(cursors/text.png), auto;
+    /*cursor: url(cursors/text.png), auto;*/
 }
 
 #main {
@@ -26,7 +26,7 @@ h2, h3, h4, span, p {
     grid-template-columns: 1fr 7fr;
     grid-template-rows: 1fr 10fr;
     font-size: 13px;
-    letter-spacing: .75px;
+    letter-spacing: 1.75px;
 }
 
 #indexLink {
@@ -144,7 +144,7 @@ a {
     padding-bottom: 20px;
     top: 10vh;
     left: 15vw;
-    cursor: url(cursors/down_arrow.png), auto;
+    /*cursor: url(cursors/down_arrow.png), auto;*/
     grid-row: 1 / 3;
     grid-column: 2;
 }
@@ -157,7 +157,7 @@ a {
 }
 
 .slide:last-child {
-    cursor: url(cursors/up_arrow.png), auto;
+    /*cursor: url(cursors/up_arrow.png), auto;*/
 }
 
 .slideImg {
