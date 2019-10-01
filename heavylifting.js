@@ -41,11 +41,13 @@ if (cmsData == null) {
     db.ref("data").once("value")
         .then((snapshot) => {
             snapshot.val().map((o) => {
-                if (o.category != "") {
-                    if (dbData[o.category] == undefined) {
-                        dbData[o.category] = {};
+                let category = encodeURIComponent(o.category);
+                let projectName = encodeURIComponent(o.projectName);
+                if (category != "") {
+                    if (dbData[category] == undefined) {
+                        dbData[category] = {};
                     }
-                    dbData[o.category][o.projectName] = o;
+                    dbData[category][projectName] = o;
                 }
             });
             window.sessionStorage.setItem("cmsData", JSON.stringify(dbData));
@@ -60,6 +62,7 @@ if (cmsData == null) {
 }
 
 function draw() {
+    console.log(pname, cname);
     if (about) {
         drawAbout();
         drawSmallSidebar();
@@ -146,6 +149,12 @@ function drawPostcards() {
     let i = 0;
     let containers = [cont1, cont2];
     cards.map( c => {
+        let uri = "?p=" 
+                 + encodeURIComponent(c.projectName) 
+                 + "&c=" 
+                 + encodeURIComponent(c.category);
+        let encodedURI = encodeURI(uri);
+        console.log(uri, encodedURI);
         let colorNumber = getRandomInt(3);
         let div = document.createElement("div");
         let a = document.createElement("a");
@@ -156,7 +165,7 @@ function drawPostcards() {
         label.innerHTML = c.projectName;
         a.setAttribute("class", colorClasses[colorNumber]);
         a.setAttribute("name", c.projectName);
-        a.setAttribute("href", encodeURI("?p=" + c.projectName + "&c=" + c.category));
+        a.setAttribute("href", encodedURI);
         a.appendChild(label);
         div.appendChild(img);
         div.appendChild(a);
@@ -172,6 +181,7 @@ function drawPostcards() {
 }
 
 function drawGallery(pname) {
+    console.log(cname, pname);
     let project = cmsData[cname][pname];
     let gallery = document.createElement("div");
     gallery.setAttribute("id", "gallery");

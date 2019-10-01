@@ -9,6 +9,30 @@
     <link rel="stylesheet" href="https://use.typekit.net/oul2deg.css">
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <style>
+      .rotate90 {
+       -webkit-transform: rotate(90deg);
+       -moz-transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+       -ms-transform: rotate(90deg);
+       transform: rotate(90deg);
+      }
+      .rotate180 {
+       -webkit-transform: rotate(180deg);
+       -moz-transform: rotate(180deg);
+       -o-transform: rotate(180deg);
+       -ms-transform: rotate(180deg);
+       transform: rotate(180deg);
+      }
+      .rotate270 {
+       -webkit-transform: rotate(270deg);
+       -moz-transform: rotate(270deg);
+       -o-transform: rotate(270deg);
+       -ms-transform: rotate(270deg);
+       transform: rotate(270deg);
+      }
+    </style>
 </head>
 
 <body>
@@ -19,6 +43,25 @@
     </div>
     <script src="heavylifting.js"></script>
 </body>
+<script>
+    // window.onload=getExif;
+    // var imgs = document.getElementsByTagName('img');
+    // function getExif() {
+    //     [...imgs].map( img => {
+    //         EXIF.getData(img, function() {
+    //             var orientation = EXIF.getTag(this, "Orientation");
+    //             if(orientation == 6) {
+    //                 newimg.className = "camview rotate90";
+    //             } else if(orientation == 8) {
+    //                 newimg.className = "camview rotate270";
+    //             } else if(orientation == 3) {
+    //                 newimg.className = "camview rotate180";
+    //             }
+    //         });
+    //     });
+        
+    // };
+</script>
 
 </html>
 
