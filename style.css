@@ -59,20 +59,26 @@ a {
     color: grey !important;
 }
 
+#innerContainer1 {
+}
+
+#innerContainer2 {
+}
+
 #postcardsContainer {
     grid-row: 1 / 3;
     grid-column: 2;
     right: 2px;
     height: unset !important;
     overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
 }
 
-#postcardsContainer div.grid-item {
-    width: 47%;
-    float: right;
-    margin: 10px;
+.postCard {
+    width: 100%;
     position: relative;
-    right: .5vw;
 }
 
 #postcardsContainer a.blue {

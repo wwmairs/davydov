@@ -126,9 +126,14 @@ function drawSmallSidebar() {
 }
 
 function drawPostcards() {
-    let cont = document.createElement("div");
-    cont.setAttribute("id", "postcardsContainer");
-    cont.setAttribute("class", "grid");
+    let cont1 = document.createElement("div");
+    let cont2 = document.createElement("div");
+    let outerContainer = document.createElement("div");
+    outerContainer.setAttribute("id", "postcardsContainer");
+    cont1.setAttribute("class", "innerContainer");
+    cont2.setAttribute("class", "innerContainer");
+    cont1.setAttribute("id", "innerContainer1");
+    cont2.setAttribute("id", "innerContainer2");
     let colorClasses = ["red", "blue", "green"];
 
     let cards = Object.values(cmsData)
@@ -138,13 +143,15 @@ function drawPostcards() {
         .filter((c) => c.category != "" && c.category != "about")
         .sort((a, b) => b.date - a.date);
 
+    let i = 0;
+    let containers = [cont1, cont2];
     cards.map( c => {
         let colorNumber = getRandomInt(3);
         let div = document.createElement("div");
         let a = document.createElement("a");
         let img = document.createElement("img");
         let label = document.createElement("span");
-        div.setAttribute("class", "grid-item postCard " + c.category);
+        div.setAttribute("class", "postCard " + c.category);
         img.setAttribute("src", c.imageLinks[0]);
         label.innerHTML = c.projectName;
         a.setAttribute("class", colorClasses[colorNumber]);
@@ -153,16 +160,15 @@ function drawPostcards() {
         a.appendChild(label);
         div.appendChild(img);
         div.appendChild(a);
-        cont.appendChild(div);
+        containers[i].appendChild(div);
+        i = (i + 1) % 2;
     });
 
-    document.getElementById("main").appendChild(cont);
-
-    imagesLoaded(document.querySelector(".grid"), () => {
-        var msnry = new Masonry(".grid", {
-            itemSelector: "grid-item"
-        });
+    containers.map( c => {
+        outerContainer.appendChild(c);
     });
+    document.getElementById("main").appendChild(outerContainer);
+
 }
 
 function drawGallery(pname) {
