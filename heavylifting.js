@@ -234,7 +234,7 @@ function drawAbout() {
     let aboutDiv = document.createElement("div");
     aboutDiv.setAttribute("id", "about-container");
     Object.entries(cmsData.about).map( (entry) => {
-        let sectionName = entry[0];
+        let sectionName = decodeURIComponent(entry[0]);
         let obj = entry[1];
         let div = document.createElement("div");
         let name = document.createElement("h4");
